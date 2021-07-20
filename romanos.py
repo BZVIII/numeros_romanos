@@ -13,7 +13,10 @@ def a_numero(cadena):
     acumulador = 0
     valor_ant = 0
     for caracter in cadena:
-        valor = digitos_romanos[caracter]
+        valor = digitos_romanos.get(caracter)
+        if not valor:
+            raise ValueError("El mío")
+
         if valor > valor_ant:
             if valor_ant in (5, 50, 500):
                 raise ValueError("No se pueden restar V, L o D")
