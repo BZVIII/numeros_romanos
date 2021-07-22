@@ -14,12 +14,20 @@ def a_numero(cadena):
     acumulador = 0
     valor_ant = 0
     cuenta_repeticiones = 0
+    cuenta_restas = 0
     for caracter in cadena:
         valor = digitos_romanos.get(caracter)
         if not valor:
             raise ValueError("El mío")
 
-        if valor > valor_ant:
+        """ Condicion de repeticion V
+        if valor_ant in (5, 50, 500) and cuenta_repeticiones > 0:
+            raise ValueError("No se pueden repetir V, L o D")
+        """
+
+        if valor_ant and valor > valor_ant:
+            if cuenta_restas > 0:
+                raise ValueError("No se pueden realizar restas consecutivas")
             if cuenta_repeticiones > 0:
                 raise ValueError("No se pueden hacer restas dentro de repeticiones")
 
@@ -31,10 +39,14 @@ def a_numero(cadena):
 
             acumulador = acumulador - valor_ant
             acumulador = acumulador + valor - valor_ant
+            cuenta_restas += 1
         else:
             acumulador = acumulador + valor
+            cuenta_restas = 0
 
         if valor == valor_ant:
+            if valor in (5, 50, 500):
+                raise ValueError("No se pueden repetir V, L ó D")
             cuenta_repeticiones += 1
             if cuenta_repeticiones == 3:                        
                 raise ValueError("Demasiadas repeticiones de {}".format(caracter))
