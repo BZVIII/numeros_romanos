@@ -14,10 +14,12 @@ class RomanosTests(unittest.TestCase):
     def test_no_se_resta_ni_V_L_D(self):
         with self.assertRaises(ValueError):
             a_numero('VC')
+        with self.assertRaises(ValueError):
             a_numero('LM')
+        with self.assertRaises(ValueError):
             a_numero('LD')
+        with self.assertRaises(ValueError):
             a_numero('DM')
-
 
     def test_no_se_resta_mas_de_un_salto(self):
         self.assertEqual(a_numero('IV'), 4)
@@ -28,19 +30,36 @@ class RomanosTests(unittest.TestCase):
         self.assertEqual(a_numero('CM'), 900)
         with self.assertRaises(ValueError):
             a_numero('IL')
+        with self.assertRaises(ValueError):
             a_numero('IC')
+        with self.assertRaises(ValueError):
             a_numero('IM')
+        with self.assertRaises(ValueError):
             a_numero('XM')
+        with self.assertRaises(ValueError):
             a_numero('XD')
 
     def tests_no_mas_de_tres_repeticiones(self):
         self.assertEqual(a_numero('III'), 3)
+        self.assertEqual(a_numero('XXXIII'), 33)
+
         with self.assertRaises(ValueError):
             a_numero('IIII')
 
     def test_no_restas_dos_iguales(self):
+    
         with self.assertRaises(ValueError):
             a_numero('CCM')
+        with self.assertRaises(ValueError):
+            a_numero('CCM')
+        with self.assertRaises(ValueError):
+            a_numero('IIX')
+
+    def test_no_restas_consecutivas(self):
+        with self.assertRaises(ValueError):
+            a_numero('IXC')
+
+    
 
 
 
