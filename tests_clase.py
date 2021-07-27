@@ -68,4 +68,13 @@ class RomanNumberClassTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             dos <= {}
 
+    def test_metodos_magicos_aritmeticos(self):
+        uno = RomanNumber(1)
 
+        self.assertEqual(RomanNumber(2), uno + 1)
+
+        with self.assertRaises(ValueError):
+            RomanNumber(2) + 2.0
+
+        self.assertEqual(RomanNumber(2), uno + uno)
+        self.assertEqual(RomanNumber(2), uno + 'I')

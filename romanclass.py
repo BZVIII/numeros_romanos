@@ -16,9 +16,11 @@ class RomanNumber():
             self.valor = valor
             self.cadena = self.a_romano()
 
-        if isinstance(valor, str):
+        elif isinstance(valor, str):
             self.cadena = valor
             self.valor = self.a_numero()
+        else:
+            raise ValueError("Solo se admiten int y cadenas")
 
     def validar(self):
         if not isinstance(self.valor, int):
@@ -180,5 +182,3 @@ class RomanNumber():
     def __radd__(self, otrovalor):
         return self.__add__(otrovalor)
     
-    def __iadd__(self, otrovalor):
-        return self.__add__(otrovalor)
